@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     private Coroutine _attackRoutine;
     private Player _player;
 
+    public int _currentHealth { get; private set; }
+
     private AIDestinationSetter _aiSetter;
 
     private void Awake()
@@ -60,12 +62,16 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
+    public void MeleeDamage(int _trueDamage)
+    {
+        _currentHealth = Mathf.Clamp(_currentHealth - _trueDamage, 0, _health);
+    }
     private void TryGetDamage()
     {
         _health -= _player.CurrentWeapon.Damage;
         if (_health <= 0)
         {
+            _player._score++;
             Ondie?.Invoke();
             Destroy(gameObject);
         }

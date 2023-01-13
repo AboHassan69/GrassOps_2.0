@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public Weapon CurrentWeapon => _weapon;
     private Coroutine _regernerationRoutine;
 
+    public int _score;
 
 
 
